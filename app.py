@@ -165,4 +165,4 @@ def admin_buchung_loeschen(buchung_id):
     db.session.delete(buchung)
     db.session.commit()
     flash('Buchung geloscht!', 'success')
-    return redirect(url_for('admin')
+    return redirect(url_for('admin'))
