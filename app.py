@@ -107,7 +107,7 @@ def buchen(fahrt_id):
     if request.method == 'POST':
         plaetze = int(request.form['plaetze'])
         fahrt.plaetze -= plaetze
-        buchung = Buchung(
+            buchung = Buchung(
             fahrt_id=fahrt_id,
             name=request.form['name'],
             email=request.form['email'],
@@ -119,16 +119,14 @@ def buchen(fahrt_id):
         flash('Buchung erfolgreich!', 'success')
         return redirect(url_for('index'))
     return render_template('buchen.html', fahrt=fahrt)
-                           
+
 @app.route('/admin')
 def admin():
     if session.get('admin_logged_in') != True:
         return render_template('admin_login.html')
-    
     users = User.query.all()
     fahrten = Fahrt.query.all()
     buchungen = Buchung.query.all()
-    
     return render_template('admin_dashboard.html', users=users, fahrten=fahrten, buchungen=buchungen)
 
 @app.route('/admin/login', methods=['GET', 'POST'])
@@ -149,20 +147,21 @@ def admin_logout():
 def admin_fahrt_loeschen(fahrt_id):
     if session.get('admin_logged_in') != True:
         return redirect(url_for('index'))
-    
     fahrt = Fahrt.query.get_or_404(fahrt_id)
     db.session.delete(fahrt)
     db.session.commit()
-    flash('Fahrt geloscht!', 'success')
+    flash('Fahrt geloescht!', 'success')
     return redirect(url_for('admin'))
 
 @app.route('/admin/buchung-loeschen/<int:buchung_id>')
 def admin_buchung_loeschen(buchung_id):
     if session.get('admin_logged_in') != True:
         return redirect(url_for('index'))
-    
     buchung = Buchung.query.get_or_404(buchung_id)
     db.session.delete(buchung)
     db.session.commit()
-    flash('Buchung geloscht!', 'success')
+    flash('Buchung geloescht!', 'success')
     return redirect(url_for('admin'))
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000))     
