@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'dein_geheimer_schluessel_2024'
+app.config['SECRET_KEY'] = 'secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///fahrten.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -106,8 +106,7 @@ def buchen(fahrt_id):
     if request.method == 'POST':
         plaetze = int(request.form['plaetze'])
         fahrt.plaetze -= plaetze
-
-buchung = Buchung(
+        buchung = Buchung(
             fahrt_id=fahrt_id,
             name=request.form['name'],
             email=request.form['email'],
@@ -122,3 +121,4 @@ buchung = Buchung(
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+
