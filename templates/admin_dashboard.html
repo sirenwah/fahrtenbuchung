@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">🚗 FahrtBook Admin</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/admin/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Admin Dashboard</h1>
+        
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mb-4">
+            <li class="nav-item">
+                <a class="nav-link active" href="#users" data-bs-toggle="tab">Benutzer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#fahrten" data-bs-toggle="tab">Fahrten</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#buchungen" data-bs-toggle="tab">Buchungen</a>
+            </li>
+        </ul>
+        
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Benutzer -->
+            <div class="tab-pane fade show active" id="users">
+                <h3>👥 Benutzer ({{ users|length }})</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>E-Mail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Fahrten -->
+            <div class="tab-pane fade" id="fahrten">
+                <h3>🚗 Fahrten ({{ fahrten|length }})</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Start</th>
+                            <th>Ziel</th>
+                            <th>Datum</th>
+                            <th>Preis</th>
+                            <th>Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fahrt in fahrten %}
+                        <tr>
+                            <td>{{ fahrt.id }}</td>
+                            <td>{{ fahrt.start }}</td>
+                            <td>{{ fahrt.ziel }}</td>
+                            <td>{{ fahrt.datum }}</td>
+                            <td>{{ fahrt.preis }}€</td>
+                            <td>
+                                <a href="/admin/fahrt-loeschen/{{ fahrt.id }}" 
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Wirklich löschen?')">Löschen</a>
+                            </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Buchungen -->
+            <div class="tab-pane fade" id="buchungen">
+                <h3>📋 Buchungen ({{ buchungen|length }})</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fahrt ID</th>
+                            <th>Name</th>
+                            <th>E-Mail</th>
+                            <th>Plätze</th>
+                            <th>Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for buchung in buchungen %}
+                        <tr>
+                            <td>{{ buchung.id }}</td>
+                            <td>{{ buchung.fahrt_id }}</td>
+                            <td>{{ buchung.name }}</td>
+                            <td>{{ buchung.email }}</td>
+                            <td>{{ buchung.plaetze }}</td>
+                            <td>
+                                <a href="/admin/buchung-loeschen/{{ buchung.id }}" 
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Wirklich löschen?')">Löschen</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html
