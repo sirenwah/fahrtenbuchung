@@ -1,3 +1,4 @@
+
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -10,7 +11,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# --- Models ---
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True)
@@ -37,11 +37,9 @@ class Buchung(db.Model):
     telefon = db.Column(db.String(20))
     plaetze = db.Column(db.Integer)
 
-# --- Datenbank erstellen ---
 with app.app_context():
     db.create_all()
 
-# --- Routes ---
 @app.route('/')
 def index():
     fahrten = Fahrt.query.all()
@@ -60,7 +58,6 @@ def registrieren():
         flash('Account erstellt!', 'success')
         return redirect(url_for('login'))
     return render_template('registrieren.html')
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -109,6 +106,7 @@ def buchen(fahrt_id):
     if request.method == 'POST':
         plaetze = int(request.form['plaetze'])
         fahrt.plaetze -= plaetze
+
 buchung = Buchung(
             fahrt_id=fahrt_id,
             name=request.form['name'],
@@ -124,5 +122,3 @@ buchung = Buchung(
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
-
-
