@@ -107,20 +107,19 @@ def buchen(fahrt_id):
     if request.method == 'POST':
         plaetze = int(request.form['plaetze'])
         fahrt.plaetze -= plaetze
-buchung = Buchung(
+        buchung = Buchung(
             fahrt_id=fahrt_id,
             name=request.form['name'],
             email=request.form['email'],
             telefon=request.form['telefon'],
-            plaetze=request.form['plaetze'],
-    
+            plaetze=plaetze
+        )
         db.session.add(buchung)
         db.session.commit()
         flash('Buchung erfolgreich!', 'success')
         return redirect(url_for('index'))
     return render_template('buchen.html', fahrt=fahrt
-    return render_template('buchen.html', fahrt=fahrt)
-
+                           
 @app.route('/admin')
 def admin():
     if session.get('admin_logged_in') != True:
