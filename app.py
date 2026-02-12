@@ -118,7 +118,7 @@ def buchen(fahrt_id):
         db.session.commit()
         flash('Buchung erfolgreich!', 'success')
         return redirect(url_for('index'))
-    return render_template('buchen.html'), fahrt=fahrt
+    return render_template('buchen.html', fahrt=fahrt)
                            
 @app.route('/admin')
 def admin():
