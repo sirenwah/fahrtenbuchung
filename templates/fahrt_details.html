@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Fahrt Details{% endblock %}
+
+{% block content %}
+<a href="/" class="btn btn-secondary mb-3">← Zurück</a>
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h3>{{ fahrt.start }} → {{ fahrt.ziel }}</h3>
+    </div>
+    <div class="card-body">
+        <p><strong>📅 Datum:</strong> {{ fahrt.datum }}</p>
+        <p><strong>⏰ Zeit:</strong> {{ fahrt.zeit }}</p>
+        <p><strong>👤 Fahrer:</strong> {{ fahrt.fahrer }}</p>
+        <p><strong>📞</strong> {{ fahrt.telefon }}</p>
+        <p><strong>💰 Preis:</strong> {{ fahrt.preis }}€ pro Platz</p>
+        <p><strong>💺 Plätze:</strong> {{ fahrt.plaetze }}</p>
+        
+        {% if fahrt.plaetze > 0 %}
+            <a href="/buchen/{{ fahrt.id }}" class="btn btn-success btn-lg">Jetzt buchen</a>
+        {% else %}
+
+	<button class="btn btn-secondary btn-lg" disabled>Ausgebucht</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

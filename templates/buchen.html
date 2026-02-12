@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Buchen{% endblock %}
+
+{% block content %}
+<a href="/fahrt/{{ fahrt.id }}" class="btn btn-secondary mb-3">← Zurück</a>
+
+<div class="card">
+    <div class="card-body">
+        <h4>Buchung: {{ fahrt.start }} → {{ fahrt.ziel }}</h4>
+        <p><strong>{{ fahrt.datum }} um {{ fahrt.zeit }}</strong></p>
+        <p><strong>{{ fahrt.preis }}€</strong> pro Platz | <strong>{{ fahrt.plaetze }} Plätze</strong> verfügbar</p>
+        
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Ihr Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">E-Mail</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Telefon</label>
+                <input type="tel" name="telefon" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Anzahl Plätze</label>
+                <input type="number" name="plaetze" class="form-control" min="1" max="{{ fahrt.plaetze }}" value="1" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Buchung abschließen</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

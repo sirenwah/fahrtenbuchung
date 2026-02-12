@@ -1,0 +1,38 @@
+6. templates/index.html
+
+{% extends "base.html" %}
+
+{% block title %}Startseite{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1>🚗 Finden Sie Ihre Fahrt</h1>
+</div>
+
+<h2>Verfügbare Fahrten</h2>
+
+{% if fahrten %}
+    <div class="row">
+        {% for fahrt in fahrten %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ fahrt.start }} → {{ fahrt.ziel }}</h5>
+                        <p>
+                            📅 {{ fahrt.datum }} um {{ fahrt.zeit }}<br>
+                            👤 {{ fahrt.fahrer }}<br>
+                            💰 {{ fahrt.preis }}€<br>
+                            💺 {{ fahrt.plaetze }} Plätze
+                        </p>
+                        <a href="/fahrt/{{ fahrt.id }}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        Keine Fahrten verfügbar.
+    </div>
+{% endif %}
+{% endblock %}

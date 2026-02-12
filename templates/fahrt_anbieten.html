@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Fahrt anbieten{% endblock %}
+
+{% block content %}
+<h2>Neue Fahrt anbieten</h2>
+
+<form method="POST" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Ihr Name</label>
+        <input type="text" name="fahrer" class="form-control" required>
+    </div>
+    
+    <div class="col-md-6">
+        <label class="form-label">Telefon</label>
+        <input type="tel" name="telefon" class="form-control" required>
+    </div>
+    
+    <div class="col-md-6">
+        <label class="form-label">Startort</label>
+        <input type="text" name="start" class="form-control" required>
+    </div>
+    
+    <div class="col-md-6">
+        <label class="form-label">Zielort</label>
+        <input type="text" name="ziel" class="form-control" required>
+    </div>
+    
+    <div class="col-md-6">
+        <label class="form-label">Datum</label>
+        <input type="date" name="datum" class="form-control" required>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Uhrzeit</label>
+        <input type="time" name="zeit" class="form-control" required>
+    </div>
+    
+    <div class="col-md-6">
+        <label class="form-label">Preis pro Platz (€)</label>
+        <input type="number" name="preis" class="form-control" step="0.01" required>
+    </div>
+    
+    <div class="col-md-6">
+        <label class="form-label">Verfügbare Plätze</label>
+        <input type="number" name="plaetze" class="form-control" min="1" required>
+    </div>
+    
+    <div class="col-12">
+        <label class="form-label">Beschreibung</label>
+        <textarea name="beschreibung" class="form-control" rows="3"></textarea>
+    </div>
+    
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Fahrt anbieten</button>
+    </div>
+</form>
+{% endblock %}
