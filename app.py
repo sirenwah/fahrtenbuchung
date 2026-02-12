@@ -165,7 +165,4 @@ def admin_buchung_loeschen(buchung_id):
     db.session.delete(buchung)
     db.session.commit()
     flash('Buchung geloscht!', 'success')
-    return redirect(url_for('admin'))
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000))
+    return redirect(url_for('admin')
