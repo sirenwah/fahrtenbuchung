@@ -112,8 +112,8 @@ buchung = Buchung(
             name=request.form['name'],
             email=request.form['email'],
             telefon=request.form['telefon'],
-            plaetze=plaetze
-        )
+            plaetze=plaetze)
+
         db.session.add(buchung)
         db.session.commit()
         flash('Buchung erfolgreich!', 'success')
