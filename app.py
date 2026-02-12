@@ -107,7 +107,7 @@ def buchen(fahrt_id):
     if request.method == 'POST':
         plaetze = int(request.form['plaetze'])
         fahrt.plaetze -= plaetze
-    buchung = Buchung(
+buchung = Buchung(
             fahrt_id=fahrt_id,
             name=request.form['name'],
             email=request.form['email'],
@@ -153,7 +153,7 @@ def admin_fahrt_loeschen(fahrt_id):
     fahrt = Fahrt.query.get_or_404(fahrt_id)
     db.session.delete(fahrt)
     db.session.commit()
-    flash('Fahrt gelöscht!', 'success')
+    flash('Fahrt geloscht!', 'success')
     return redirect(url_for('admin'))
 
 @app.route('/admin/buchung-loeschen/<int:buchung_id>')
@@ -164,7 +164,7 @@ def admin_buchung_loeschen(buchung_id):
     buchung = Buchung.query.get_or_404(buchung_id)
     db.session.delete(buchung)
     db.session.commit()
-    flash('Buchung gelöscht!', 'success')
+    flash('Buchung geloscht!', 'success')
     return redirect(url_for('admin'))
 
 if __name__ == '__main__':
