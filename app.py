@@ -1,5 +1,3 @@
-
-
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -107,7 +105,7 @@ def fahrt_details(fahrt_id):
 @app.route('/buchen/<int:fahrt_id>', methods=['GET', 'POST'])
 def buchen(fahrt_id):
     fahrt = Fahrt.query.get_or_404(fahrt_id)
-    if request.method == 'POST': 
+    if request.method == 'POST':
         plaetze = int(request.form['plaetze'])
 
 fahrt.plaetze -= plaetze
