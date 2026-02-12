@@ -40,9 +40,6 @@ class Buchung(db.Model):
     telefon = db.Column(db.String(20))
     plaetze = db.Column(db.Integer)
 
-# --- Datenbank erstellen ---
-with app.app_context():
-    db.create_all()
 
 # --- Routes ---
 @app.route('/')
@@ -125,6 +122,4 @@ fahrt.plaetze -= plaetze
         return redirect(url_for('index'))
     return render_template('buchen.html', fahrt=fahrt)
 
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+
