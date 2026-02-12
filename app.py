@@ -1,4 +1,5 @@
 
+
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -37,6 +38,10 @@ class Buchung(db.Model):
     email = db.Column(db.String(100))
     telefon = db.Column(db.String(20))
     plaetze = db.Column(db.Integer)
+
+# --- Datenbank erstellen ---
+with app.app_context():
+    db.create_all()
 
 # --- Routes ---
 @app.route('/')
@@ -102,11 +107,10 @@ def fahrt_details(fahrt_id):
 @app.route('/buchen/<int:fahrt_id>', methods=['GET', 'POST'])
 def buchen(fahrt_id):
     fahrt = Fahrt.query.get_or_404(fahrt_id)
-    
-    if request.method == 'POST':
+    if request.method == 'POST': 
         plaetze = int(request.form['plaetze'])
-        fahrt.plaetze -= plaetze
-        
+
+fahrt.plaetze -= plaetze
         buchung = Buchung(
             fahrt_id=fahrt_id,
             name=request.form['name'],
@@ -118,11 +122,7 @@ def buchen(fahrt_id):
         db.session.commit()
         flash('Buchung erfolgreich!', 'success')
         return redirect(url_for('index'))
-    
     return render_template('buchen.html', fahrt=fahrt)
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
-
