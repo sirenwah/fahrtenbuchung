@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dein_geheimer_schluessel_2024'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/fahrten.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://fahrtenbuch_postgres_sql_user:vNEGTiMcWrpbY0BoUBctYhfZQXikv680@dpg-d66t91esb7us73bkdm70-a/fahrtenbuch_postgres_sql'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
