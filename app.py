@@ -112,12 +112,13 @@ buchung = Buchung(
             name=request.form['name'],
             email=request.form['email'],
             telefon=request.form['telefon'],
-            plaetze=plaetze)
-
+            plaetze=request.from['plaetze'],
+    
         db.session.add(buchung)
         db.session.commit()
         flash('Buchung erfolgreich!', 'success')
         return redirect(url_for('index'))
+    return render_template('buchen.html', fahrt=fahrt
     return render_template('buchen.html', fahrt=fahrt)
 
 @app.route('/admin')
