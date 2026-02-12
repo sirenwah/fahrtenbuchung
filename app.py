@@ -1,4 +1,3 @@
-
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -39,6 +38,8 @@ class Buchung(db.Model):
 
 with app.app_context():
     db.create_all()
+
+ADMIN_PASSWORD = 'admin123'
 
 @app.route('/')
 def index():
@@ -106,7 +107,7 @@ def buchen(fahrt_id):
     if request.method == 'POST':
         plaetze = int(request.form['plaetze'])
         fahrt.plaetze -= plaetze
-        buchung = Buchung(
+    buchung = Buchung(
             fahrt_id=fahrt_id,
             name=request.form['name'],
             email=request.form['email'],
@@ -118,13 +119,6 @@ def buchen(fahrt_id):
         flash('Buchung erfolgreich!', 'success')
         return redirect(url_for('index'))
     return render_template('buchen.html', fahrt=fahrt)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
-
-
-# --- Admin Routes ---
-ADMIN_PASSWORD = 'admin123'
 
 @app.route('/admin')
 def admin():
@@ -171,5 +165,7 @@ def admin_buchung_loeschen(buchung_id):
     db.session.delete(buchung)
     db.session.commit()
     flash('Buchung gelöscht!', 'success')
-    return redirect(url_for('admin')
+    return redirect(url_for('admin'))
 
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000))
