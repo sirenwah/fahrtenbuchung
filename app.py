@@ -112,7 +112,7 @@ buchung = Buchung(
             name=request.form['name'],
             email=request.form['email'],
             telefon=request.form['telefon'],
-            plaetze=request.from['plaetze'],
+            plaetze=request.form['plaetze'],
     
         db.session.add(buchung)
         db.session.commit()
