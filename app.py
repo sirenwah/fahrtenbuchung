@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dein_geheimer_schluessel_2024'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fahrten.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/fahrten.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
